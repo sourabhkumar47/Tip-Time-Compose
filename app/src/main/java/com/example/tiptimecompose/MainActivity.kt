@@ -41,7 +41,6 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun TipTimeScreen() {
-    //Hoist the state
     var amountInput by remember { mutableStateOf("") }
 
     val amount = amountInput.toDoubleOrNull() ?: 0.0
@@ -52,24 +51,21 @@ fun TipTimeScreen() {
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Text(
-            stringResource(R.string.calculate_tip),
+            text = stringResource(R.string.calculate_tip),
             fontSize = 24.sp,
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
-        Spacer(modifier = Modifier.height(16.dp))
-        EditNumberField(
-            value = amountInput,
-            onValueChange = {amountInput = it}
+        Spacer(Modifier.height(16.dp))
+        EditNumberField(value = amountInput,
+            onValueChange = { amountInput = it }
         )
-
         Spacer(Modifier.height(24.dp))
-
         Text(
             text = stringResource(R.string.tip_amount, tip),
             modifier = Modifier.align(Alignment.CenterHorizontally),
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold
-            )
+        )
     }
 }
 
@@ -78,10 +74,9 @@ fun EditNumberField(
     value: String,
     onValueChange: (String) -> Unit
 ) {
-
     TextField(
         value = value,
-        onValueChange = { onValueChange },
+        onValueChange = onValueChange,
         label = { Text(stringResource(R.string.cost_of_service)) },
         modifier = Modifier.fillMaxWidth(),
         singleLine = true,
@@ -89,13 +84,21 @@ fun EditNumberField(
     )
 }
 
+//private fun calculateTip(
+//    amount: Double,
+//    tipPercent: Double = 15.0
+//): String {
+//    val tip = tipPercent / 100 * amount
+//    val local = Locale.getDefault()
+//    return NumberFormat.getCurrencyInstance(local).format(tip)
+//}
+
 private fun calculateTip(
     amount: Double,
     tipPercent: Double = 15.0
 ): String {
     val tip = tipPercent / 100 * amount
-    val local = Locale.getDefault()
-    return NumberFormat.getCurrencyInstance(local).format(tip)
+    return NumberFormat.getCurrencyInstance().format(tip)
 }
 
 @Preview(showBackground = true)
