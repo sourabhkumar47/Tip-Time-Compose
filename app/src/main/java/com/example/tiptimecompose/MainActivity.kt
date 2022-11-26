@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tiptimecompose.ui.theme.TipTimeComposeTheme
 import java.text.NumberFormat
-import java.util.*
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,7 +76,7 @@ fun EditNumberField(
     TextField(
         value = value,
         onValueChange = onValueChange,
-        label = { Text(stringResource(R.string.cost_of_service)) },
+        label = { Text(stringResource(R.string.bill_Amount)) },
         modifier = Modifier.fillMaxWidth(),
         singleLine = true,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
