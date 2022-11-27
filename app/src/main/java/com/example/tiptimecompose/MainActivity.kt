@@ -42,12 +42,12 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun TipTimeScreen() {
     var amountInput by remember { mutableStateOf("") }
-
     val amount = amountInput.toDoubleOrNull() ?: 0.0
-    val tip = calculateTip(amount)
 
     var tipInput by remember { mutableStateOf("") }
+    val tipPercent = tipInput.toDoubleOrNull() ?: 0.0
 
+    val tip = calculateTip(amount, tipPercent)
 
     Column(
         modifier = Modifier.padding(32.dp),
@@ -68,7 +68,7 @@ fun TipTimeScreen() {
         EditNumberField(
             label = R.string.how_was_the_service,
             value = tipInput,
-            onValueChange = {tipInput = it }
+            onValueChange = { tipInput = it }
         )
 
         Spacer(Modifier.height(24.dp))
@@ -97,15 +97,6 @@ fun EditNumberField(
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
     )
 }
-
-//private fun calculateTip(
-//    amount: Double,
-//    tipPercent: Double = 15.0
-//): String {
-//    val tip = tipPercent / 100 * amount
-//    val local = Locale.getDefault()
-//    return NumberFormat.getCurrencyInstance(local).format(tip)
-//}
 
 private fun calculateTip(
     amount: Double,
