@@ -3,6 +3,7 @@ package com.example.tiptimecompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.MaterialTheme
@@ -55,9 +56,18 @@ fun TipTimeScreen() {
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
         Spacer(Modifier.height(16.dp))
-        EditNumberField(value = amountInput,
+        EditNumberField(
+            label = R.string.bill_Amount,
+            value = amountInput,
             onValueChange = { amountInput = it }
         )
+
+        EditNumberField(
+            label = R.string.how_was_the_service,
+            value = "",
+            onValueChange = {}
+        )
+
         Spacer(Modifier.height(24.dp))
         Text(
             text = stringResource(R.string.tip_amount, tip),
@@ -70,13 +80,15 @@ fun TipTimeScreen() {
 
 @Composable
 fun EditNumberField(
+    @StringRes label: Int,
     value: String,
-    onValueChange: (String) -> Unit
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     TextField(
         value = value,
         onValueChange = onValueChange,
-        label = { Text(stringResource(R.string.bill_Amount)) },
+        label = { Text(stringResource(label)) },
         modifier = Modifier.fillMaxWidth(),
         singleLine = true,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
