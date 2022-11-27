@@ -65,7 +65,7 @@ fun TipTimeScreen() {
         EditNumberField(
             label = R.string.how_was_the_service,
             value = "",
-            onValueChange = {}
+            onValueChange = { }
         )
 
         Spacer(Modifier.height(24.dp))
